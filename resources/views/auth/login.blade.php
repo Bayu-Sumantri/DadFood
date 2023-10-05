@@ -49,8 +49,8 @@
                         <input-label for="email" :value="__('Email')" />
                         <input class="input100" type="text" name="email" requiredautofocus autocomplete="username"
                             :value="old('email')">
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         <span class="focus-input100" data-placeholder="Email"></span>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
@@ -59,8 +59,8 @@
                         </span>
                         <input-label for="password" :value="__('Password')" />
                         <input class="input100" type="password" name="password" id="inputPassword" required>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" /> 
                         <span class="focus-input100" data-placeholder="Password"></span>
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" /> 
                     </div>
 
                     <div class="container-login100-form-btn">
