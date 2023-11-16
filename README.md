@@ -50,6 +50,7 @@ DB_PASSWORD=
 
 ```shell
 php artisan storage:link
+cp .env.example .env
 ```
 
 **Run Local Server**
