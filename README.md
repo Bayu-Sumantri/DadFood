@@ -1,4 +1,4 @@
-# Anime_Ku-V2
+# BudheFood
 
 Website ini adalah sebuah web yang dimana dia website seperti webs restoran simpe dengan menggunakan CRUD
 yang dimana dia dalam weeb tersebut sudah tersedia 2 role admin dan user dengan yang akan datang role suplayer
