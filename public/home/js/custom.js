@@ -9,8 +9,8 @@ getYear();
 
 
 // isotope js
-$(window).on('load', function () {
-    $('.filters_menu li').click(function () {
+$(window).on('load', function() {
+    $('.filters_menu li').click(function() {
         $('.filters_menu li').removeClass('active');
         $(this).addClass('active');
 
@@ -32,12 +32,12 @@ $(window).on('load', function () {
 // nice select
 $(document).ready(function() {
     $('select').niceSelect();
-  });
+});
 
 /** google_map js **/
 function myMap() {
     var mapProp = {
-        center: new google.maps.LatLng(40.712775, -74.005973),
+        center: new google.maps.LatLng(-6.218129, 106.862480),
         zoom: 18,
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);

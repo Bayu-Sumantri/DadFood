@@ -7,6 +7,11 @@
 
 
 <div class="container-fluid pt-4 px-4">
+	@if (session()->has('success'))
+	<div class="alert alert-success">
+		{{ session('success') }}
+	</div>
+	@endif
 
     <form action="{{ route('Users.store') }}" method="post">
         @csrf

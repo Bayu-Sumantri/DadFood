@@ -71,9 +71,9 @@
       <div class="footer-info">
         <p>
           &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a><br><br>
+          <a href="https://github.com/bayu-sumantri" target="_blank">Banh_Code</a><br><br>
           &copy; <span id="displayYear"></span> Distributed By
-          <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+          <a href="https://github.com/bayu-sumantri" target="_blank">Banh_Code</a>
         </p>
       </div>
     </div>

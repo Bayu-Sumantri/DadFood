@@ -2,9 +2,9 @@
     <header class="header_section">
         <div class="container">
             <nav class="navbar navbar-expand-lg custom_nav-container ">
-                <a class="navbar-brand" href="{{ url('index.html') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <span>
-                        DadeFood
+                        BudheFood
                     </span>
                 </a>
 
@@ -31,9 +31,9 @@
                     </ul>
                     <div class="user_option">
                         <form class="form-inline">
-                            <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                            {{-- <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                                 <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
+                            </button> --}}
                         </form>
                         <a class="cart_link" href="{{ url('#') }}">
                             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -95,8 +95,13 @@
                                 </g>
                             </svg>
                         </a>
-                        <a href="{{ route("login") }}" class="user_link">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                        <a href="{{ route('login') }}" class="user_link">
+                            @if (auth()->check() && auth()->user()->Profile)
+                                <img
+                                    class="user"src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->Profile) }}"alt="">
+                            @else
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            @endif
                         </a>
                     </div>
                 </div>

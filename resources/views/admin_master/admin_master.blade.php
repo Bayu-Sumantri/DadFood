@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DadeFood | Dashboard</title>
+    <title>BudheFood | Dashboard</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -51,7 +51,7 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-                <a href="{{ url('index.html') }}" class="navbar-brand d-flex d-lg-none me-4">
+                <a href="{{ url('dashboard') }}" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
                 </a>
                 <a href="{{ url('#') }}" class="sidebar-toggler flex-shrink-0">
