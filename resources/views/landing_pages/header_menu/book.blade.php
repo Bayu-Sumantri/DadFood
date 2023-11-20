@@ -150,44 +150,43 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
-              <div>
-                <input type="text" class="form-control" placeholder="Your Name" />
-              </div>
-              <div>
-                <input type="text" class="form-control" placeholder="Phone Number" />
-              </div>
-              <div>
-                <input type="email" class="form-control" placeholder="Your Email" />
-              </div>
-              <div>
-                <select class="form-control nice-select wide">
-                  <option value="" disabled selected>
-                    How many persons?
-                  </option>
-                  <option value="">
-                    2
-                  </option>
-                  <option value="">
-                    3
-                  </option>
-                  <option value="">
-                    4
-                  </option>
-                  <option value="">
-                    5
-                  </option>
-                </select>
-              </div>
-              <div>
-                <input type="date" class="form-control">
-              </div>
-              <div class="btn_box">
-                <button>
-                  Book Now
-                </button>
-              </div>
-            </form>
+            <form action="{{ route('booking.store') }}" method="post">
+                            @csrf
+                            <div>
+                                <input type="text" class="form-control" name="name" placeholder="Your Name" />
+                            </div>
+                                    <div>
+                                        <input type="email" class="form-control" name="email"
+                                            value="{{ auth()->user()->email?? '' }}" placeholder="masukan email kamu" />
+
+                                    </div>
+
+                            <div>
+                                <input type="hidden" class="form-control" name="user_id"
+                                    value="{{ auth()->user()->id?? '' }}" readonly />
+
+                            </div>
+                            <div>
+                                <input type="number" class="form-control" name="number_phone"
+                                    placeholder="Phone Number" />
+                            </div>
+                            <div>
+                                <input type="number" class="form-control" name="guests"
+                                    placeholder="How many persons?" />
+                            </div>
+                            <div>
+                                <input type="datetime-local" name="tanggal_reservasi" class="form-control">
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" name="table_name"
+                                    placeholder="Table Name" />
+                            </div>
+                            <div class="btn_box">
+                                <button>
+                                    Book Now
+                                </button>
+                            </div>
+                        </form>
           </div>
         </div>
         <div class="col-md-6">

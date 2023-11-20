@@ -60,86 +60,92 @@
             <img src="{{ asset('/home/images/hero-bg.jpg') }}" alt="">
         </div>
         @include('landing_pages.header')
- <!-- slider section -->
-    <section class="slider_section ">
-      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7 col-lg-6 ">
-                  <div class="detail-box">
-                    <h1>
-                      Fast Food Restaurant
-                    </h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Order Now
-                      </a>
+        <!-- slider section -->
+        <section class="slider_section ">
+            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-6 ">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Fast Food Restaurant
+                                        </h1>
+                                        <p>
+                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
+                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
+                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="" class="btn1">
+                                                Order Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item ">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7 col-lg-6 ">
-                  <div class="detail-box">
-                    <h1>
-                      Fast Food Restaurant
-                    </h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Order Now
-                      </a>
+                    <div class="carousel-item ">
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-6 ">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Fast Food Restaurant
+                                        </h1>
+                                        <p>
+                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
+                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
+                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="" class="btn1">
+                                                Order Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7 col-lg-6 ">
-                  <div class="detail-box">
-                    <h1>
-                      Fast Food Restaurant
-                    </h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Order Now
-                      </a>
+                    <div class="carousel-item">
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-6 ">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Fast Food Restaurant
+                                        </h1>
+                                        <p>
+                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
+                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
+                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="" class="btn1">
+                                                Order Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+                <div class="container">
+                    <ol class="carousel-indicators">
+                        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+                        <li data-target="#customCarousel1" data-slide-to="1"></li>
+                        <li data-target="#customCarousel1" data-slide-to="2"></li>
+                    </ol>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="container">
-          <ol class="carousel-indicators">
-            <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-            <li data-target="#customCarousel1" data-slide-to="1"></li>
-            <li data-target="#customCarousel1" data-slide-to="2"></li>
-          </ol>
-        </div>
-      </div>
 
-    </section>
-    <!-- end slider section -->
-  </div>
+        </section>
+        <!-- end slider section -->
+    </div>
 
     @yield('landing_pages')
 
@@ -181,6 +187,11 @@
     <!-- book section -->
     <section class="book_section layout_padding">
         <div class="container">
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="heading_container">
                 <h2>
                     Book A Table
@@ -189,24 +200,36 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form_container">
-                        <form action="">
+                        <form action="{{ route('booking.store') }}" method="post">
+                            @csrf
                             <div>
-                                <input type="text" class="form-control" placeholder="Your Name" />
+                                <input type="text" class="form-control" name="name" placeholder="Your Name" />
+                            </div>
+                                    <div>
+                                        <input type="email" class="form-control" name="email"
+                                            value="{{ auth()->user()->email?? '' }}" placeholder="masukan email kamu" />
+
+                                    </div>
+
+                            <div>
+                                <input type="hidden" class="form-control" name="user_id"
+                                    value="{{ auth()->user()->id?? '' }}" readonly />
+
                             </div>
                             <div>
-                                <input type="number" class="form-control" placeholder="Phone Number" />
+                                <input type="number" class="form-control" name="number_phone"
+                                    placeholder="Phone Number" />
                             </div>
                             <div>
-                                <input type="email" class="form-control" placeholder="Your Email" />
+                                <input type="number" class="form-control" name="guests"
+                                    placeholder="How many persons?" />
                             </div>
                             <div>
-                                <input type="text" class="form-control" placeholder="How many persons?" />
+                                <input type="datetime-local" name="tanggal_reservasi" class="form-control">
                             </div>
                             <div>
-                                <input type="text" class="form-control" placeholder="Table Name" />
-                            </div>
-                            <div>
-                                <input type="date" class="form-control">
+                                <input type="text" class="form-control" name="table_name"
+                                    placeholder="Table Name" />
                             </div>
                             <div class="btn_box">
                                 <button>

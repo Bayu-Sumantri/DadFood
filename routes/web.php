@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Models\Food;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ use App\Http\Controllers\PotoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PemesananController;
+use App\Models\Booking;
 use App\Models\MenuPromo;
 use App\Models\Pemesanan;
 
@@ -49,7 +51,8 @@ Route::get('/dashboard', function () {
     $total_promo = MenuPromo::count();
     $total_users = User::count();
     $total_pemesanan = Pemesanan::count();
-    return view('admin_master.index', compact('total_users','total_food','total_promo', 'total_pemesanan'));
+    $total_booking = Booking::count();
+    return view('admin_master.index', compact('total_users','total_food','total_promo', 'total_pemesanan', 'total_booking'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -141,6 +144,10 @@ Route::get('/pemesanan_food/{id}', function (string $id) {
 Route::post('/buat_pemesanan', [PemesananController::class, 'store'])->name('buat_pemesanan');
 
 
+// booking / reservasi table restoran 
+Route::resource('booking', 'App\Http\Controllers\BookingController');
+
+Route::get('/booking_table', [BookingController::class,"create"])->name('booking_table'); // halaman create menu saja
 
 
 

@@ -77,7 +77,11 @@
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="{{ url('profil') }}" class="dropdown-item">My Profile</a>
                             <a href="{{ url('#') }}" class="dropdown-item">Settings</a>
-                            <a href="{{ url('#') }}" class="dropdown-item">Log Out</a>
+                            <form class="" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-block btn-danger dropdown-item">Log Out</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
