@@ -8,7 +8,7 @@ dengan fitur yang memadai
 
 -   create food promo {admin} 
 -   Create Food {admin} 
--   Comman To Google Sheet (untuk ini link Google Sheet nya bisa di ganti sesuai kalian 'resources/views/landing_pages/header_menu/about.blade.php' )  
+-   Comman To Google Sheet (untuk ini link Google Sheet nya bisa di ganti sesuai kalian `resources/views/landing_pages/header_menu/about.blade.php` )  
 
 ## Jalankan Secara Lokal
 
