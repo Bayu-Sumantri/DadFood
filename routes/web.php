@@ -150,6 +150,26 @@ Route::resource('booking', 'App\Http\Controllers\BookingController');
 Route::get('/booking_table', [BookingController::class,"create"])->name('booking_table'); // halaman create menu saja
 
 
+// pemesanan AdminShow
+Route::get('/pemesanan_show', function () {
+    $pemesanan = Pemesanan::simplePaginate(10);
+    // return $episode;
+    return view('admin_master.admin_sup.pemesanan_show', compact('pemesanan'));
+})->name('pemesanan_show');
+
+
+// pemesanan User
+Route::get('/pemesanan_user', function () {
+    $pemesanan = Pemesanan::simplePaginate(10);
+    // return $episode;
+    return view('admin_master.user_sup.pemesanan_show', compact('pemesanan'));
+})->name('pemesanan_user');
+    Route::patch('/pemesanan_payment', [PemesananController::class, 'update'])->name('pemesanan_payment.update');
+
+
+// Route::delete('/delete/{id}', [PemesananController::class,"destroy"])->name('delate.pemesanan');
+
+
 
 
 

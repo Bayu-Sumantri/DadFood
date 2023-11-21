@@ -55,6 +55,8 @@
 
 <body>
 
+@include('sweetalert::alert')
+
     <div class="hero_area">
         <div class="bg-box">
             <img src="{{ asset('/home/images/hero-bg.jpg') }}" alt="">
@@ -187,11 +189,6 @@
     <!-- book section -->
     <section class="book_section layout_padding">
         <div class="container">
-            @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
             <div class="heading_container">
                 <h2>
                     Book A Table

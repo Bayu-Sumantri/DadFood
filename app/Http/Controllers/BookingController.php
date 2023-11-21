@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BookingController extends Controller
 {
@@ -59,8 +60,8 @@ class BookingController extends Controller
             'table_name'                => $request->table_name,
         ]);
         // return $data;
-
-        return redirect(route('booking_table'))->with('success', 'successfully uploaded your anime');
+        Alert::success('Berhasil', 'Success Message');
+        return redirect(route('booking_table'))->with('success');
     }
 
     /**

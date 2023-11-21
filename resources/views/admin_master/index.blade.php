@@ -10,7 +10,7 @@
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-users fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">User's</p>
+                    <a href="{{ route('Users.index') }}" class="mb-2">User's</a>
                     <h6 class="mb-0">{{ $total_users }} Active</h6>
 
                 </div>
@@ -20,7 +20,7 @@
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-tv fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Food Total</p>
+                    <a href="{{ route('menu_show') }}" class="mb-2">Food Total</a>
                     <h6 class="mb-0">{{ $total_food }} Food</h6>
 
                 </div>
@@ -31,7 +31,7 @@
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-tv fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Promo Total</p>
+                    <a href="{{ route('promomenu') }}" class="mb-2">Promo Total</a>
                     <h6 class="mb-0">{{ $total_promo }} Food</h6>
 
                 </div>
@@ -42,7 +42,7 @@
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-tv fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Total Pemesanan</p>
+                    <a href="{{ route('pemesanan_show') }}" class="mb-2">Total Pemesanan</a>
                     <h6 class="mb-0">{{ $total_pemesanan }} Pemesanan</h6>
 
                 </div>
@@ -53,7 +53,7 @@
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-tv fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Total Booking</p>
+                    <a href="{{ route('dashboard') }}" class="mb-2">Total Booking</a>
                     <h6 class="mb-0">{{ $total_booking }} Booking</h6>
 
                 </div>

@@ -43,6 +43,7 @@
         </div>
         <!-- Spinner End -->
 
+        @include('sweetalert::alert')
 
         @include('admin_master.sidebar')
 

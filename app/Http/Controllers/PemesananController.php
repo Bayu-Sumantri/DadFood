@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PemesananController extends Controller
 {
@@ -64,7 +65,8 @@ class PemesananController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pemesanan = Pemesanan::findOrFail($id);            
+        return view('admin_master.user_sup.pembelian_user', compact('pemesanan'));
     }
 
     /**
@@ -80,6 +82,12 @@ class PemesananController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Pemesanan::findOrfail($id);
+        // return $pemesanan;
+        $data->delete($id);
+    
+        Alert::success('Berhasil', 'Success Delete');
+        return back()->with('success');
     }
+    
 }

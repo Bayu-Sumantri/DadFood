@@ -75,11 +75,11 @@
                             </li>
                         </ul>
                         <div class="user_option">
-                            <form class="form-inline">
+                            {{-- <form class="form-inline">
                                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </button>
-                            </form>
+                            </form> --}}
                             <a class="cart_link" href="{{ url('#') }}">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

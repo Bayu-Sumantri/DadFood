@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pemesanan extends Model
 {
@@ -18,4 +19,14 @@ class Pemesanan extends Model
         "status",
         "total_pemesanan",
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function food(): BelongsTo
+    {
+        return $this->belongsTo(Food::class, 'id_makanan');
+    }
 }
