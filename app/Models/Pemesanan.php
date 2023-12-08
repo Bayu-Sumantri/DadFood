@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Pemesanan extends Model
 {
@@ -20,6 +21,11 @@ class Pemesanan extends Model
         "total_pemesanan",
     ];
 
+    public function pembayaran(): HasOne
+    {
+        return $this->HasOne(pembayaran::class, 'id_pemesanan');
+    }
+    
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

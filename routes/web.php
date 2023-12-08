@@ -10,6 +10,7 @@ use App\Http\Controllers\PotoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\PembelianController;
 use App\Models\Booking;
 use App\Models\MenuPromo;
 use App\Models\Pemesanan;
@@ -133,13 +134,13 @@ Route::patch('/edit_menuFood/{id}', [FoodController::class, 'update'])->name('ed
 
 
 //pemesanan
-Route::resource('Pemesanan', 'App\Http\Controllers\PemesananController');
+Route::resource('Pemesanan', 'App\Http\Controllers\PemesananController')->middleware(['auth']);
 Route::get('/pemesanan_food/{id}', function (string $id) {
     $food = Food::findOrFail($id);
     $allfood = Food::all();
     // return $episode;
     return view('landing_pages.pemesanan_menu.pesan_menu', compact('food','allfood'));
-})->name('pemesanan_food');
+})->name('pemesanan_food')->middleware(['auth']);
 
 Route::post('/buat_pemesanan', [PemesananController::class, 'store'])->name('buat_pemesanan');
 
@@ -163,11 +164,18 @@ Route::get('/pemesanan_user', function () {
     $pemesanan = Pemesanan::simplePaginate(10);
     // return $episode;
     return view('admin_master.user_sup.pemesanan_show', compact('pemesanan'));
-})->name('pemesanan_user');
-    Route::patch('/pemesanan_payment', [PemesananController::class, 'update'])->name('pemesanan_payment.update');
+})->name('pemesanan_user')->middleware(['auth']);
+    Route::patch('/pemesanan_payment/{id}', [PemesananController::class, 'update'])->name('pemesanan_payment.update');
 
 
 // Route::delete('/delete/{id}', [PemesananController::class,"destroy"])->name('delate.pemesanan');
+
+// pembelia user 
+Route::resource('pembelian', 'App\Http\Controllers\PembelianController');
+Route::get('/pembelian_show', [PembelianController::class, 'index'])->name('pembelian_show');
+
+
+
 
 
 

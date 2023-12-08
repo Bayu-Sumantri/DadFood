@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_makanan')->references('id')->on('food');
             $table->foreignId('id_pemesanan')->references('id')->on('pemesanans');
             $table->enum('metode_pembayaran', ['dana', 'bank', 'COD']);
-            $table->string('nomor_dana');
-            $table->string('rekening_bank');
-            $table->string('alamat_tujuan');
+            $table->string('nomor_dana')->nullable();
+            $table->string('rekening_bank')->nullable();
+            $table->string('alamat_tujuan')->nullable();
             $table->timestamps();
         });
     }

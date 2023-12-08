@@ -26,5 +26,11 @@ class Food extends Model
             return $this->hasOne(Category::class, 'id_makanan');
         }
 
+        
+            public function pemesanan(): HasOne
+        {
+            return $this->hasOne(pemesanan::class, 'id_makanan');
+        }
+
 
 }
