@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $user = User::orderBy('name', 'asc')->simplePaginate(3);
         $total_user = User::count();
-        return view('admin_master.admin_sup.users',compact('user', 'total_user'));
+        return view('admin_master.admin_sup.users', compact('user', 'total_user'));
     }
 
     /**
@@ -46,7 +46,6 @@ class UserController extends Controller
             'level' => $request->level,
         ]);
         return redirect()->route('Users.index')->with('success', "successfully Create user");
-
     }
 
     /**
@@ -63,7 +62,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::findOrFail($id);            
+        $user = User::findOrFail($id);
         return view('admin_master.side_admin.user_edit', compact('user'));
     }
 
@@ -72,7 +71,17 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
+        // Update user data
+        $user->update([
+            'name' => $request->name,
+            'level' => $request->level,
+        ]);
+
+        // Redirect or return a response as needed
+        return redirect()->route('Users.index'); // Adjust the route accordingly
     }
 
     /**
@@ -82,14 +91,14 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $profilePath = $user->Profile;
-  
+
         if (!is_null($profilePath)) {
-          Storage::delete($profilePath);
-      }
-  
-      $user->delete();
-  
-      $user = User::orderBy('name', 'asc')->simplePaginate(3);
-      $total_user = User::count();
+            Storage::delete($profilePath);
+        }
+
+        $user->delete();
+
+        $user = User::orderBy('name', 'asc')->simplePaginate(3);
+        $total_user = User::count();
     }
 }

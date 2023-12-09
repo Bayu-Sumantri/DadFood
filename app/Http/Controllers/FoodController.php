@@ -59,7 +59,7 @@ class FoodController extends Controller
             "deskripsi_singkat"     => $request->deskripsi_singkat,
             "harga"                 => $request->harga,
         ]);
-        
+
        $food->Category()->create([
             "category"          => $request->category,
         ]);
@@ -97,9 +97,9 @@ class FoodController extends Controller
     {
         $food = Food::findOrFail($id);
         $food -> update([
-           'deskripsi_lengkap'           =>$request->deskripsi_lengkap,  
-           'deskripsi_singkat'           =>$request->deskripsi_singkat,  
-           'harga'           =>$request->harga,  
+           'deskripsi_lengkap'           =>$request->deskripsi_lengkap,
+           'deskripsi_singkat'           =>$request->deskripsi_singkat,
+           'harga'              =>$request->harga,
        ]);
 // return $food;
 

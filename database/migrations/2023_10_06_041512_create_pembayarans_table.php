@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nomor_dana')->nullable();
             $table->string('rekening_bank')->nullable();
             $table->string('alamat_tujuan')->nullable();
+            $table->enum('status', ['menunggu', 'merjalanan' , 'selesai'])->default('menunggu');
             $table->timestamps();
         });
     }

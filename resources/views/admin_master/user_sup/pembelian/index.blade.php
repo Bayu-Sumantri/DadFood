@@ -14,11 +14,12 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">NAMA MAKANAN</th>
-                        <th scope="col">NOMOR PEMESANAN</th>
-                        <th scope="col">METODE PEMBAYARAN</th>
-                        <th scope="col">NOMOR PEMBAYARAN</th>
+                        <th scope="col">MAKANAN</th>
+                        <th scope="col">NO PEMESANAN</th>
+                        <th scope="col">PEMBAYARAN</th>
+                        <th scope="col">NO PEMBAYARAN</th>
                         <th scope="col">HARGA</th>
+                        <th scope="col">STATUS</th>
                         <th scope="col">TANGGAL PEMBAYARAN</th>
                     </tr>
                 </thead>
@@ -40,6 +41,26 @@
                                 @endif
                             </td>
                             <td>{{ $row->food->harga }}</td>
+                            <td>
+                                @if($row->status === 'menunggu')
+                                    <div class="badge bg-info text-wrap" style="width: 6rem;">
+                                        {{ $row->status }}
+                                    </div>
+                                @elseif($row->status === 'perjalanan')
+                                    <div class="badge bg-warning text-wrap" style="width: 6rem;">
+                                        {{ $row->status }}
+                                    </div>
+                                @elseif($row->status === 'selesai')
+                                    <div class="badge bg-success text-wrap" style="width: 6rem;">
+                                        {{ $row->status }}
+                                    </div>
+                                @else
+                                    <!-- Handle other status conditions if needed -->
+                                    <div class="badge bg-secondary text-wrap" style="width: 6rem;">
+                                        Unknown Status
+                                    </div>
+                                @endif
+                            </td>
                             <td>{{ $row->created_at->diffForHumans() }}</td>
 							</form></td>
 

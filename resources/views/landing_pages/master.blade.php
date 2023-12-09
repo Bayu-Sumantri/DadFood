@@ -51,11 +51,18 @@
         background-position: center center;
         background-size: cover;
     }
+
+    .btn-primary {
+        font-size: 12px; /* Ubah ukuran font sesuai keinginan */
+        padding: 5px 10px; /* Sesuaikan ukuran padding */
+    }
 </style>
+
+
 
 <body>
 
-@include('sweetalert::alert')
+    @include('sweetalert::alert')
 
     <div class="hero_area">
         <div class="bg-box">
@@ -202,15 +209,15 @@
                             <div>
                                 <input type="text" class="form-control" name="name" placeholder="Your Name" />
                             </div>
-                                    <div>
-                                        <input type="email" class="form-control" name="email"
-                                            value="{{ auth()->user()->email?? '' }}" placeholder="masukan email kamu" />
+                            <div>
+                                <input type="email" class="form-control" name="email"
+                                    value="{{ auth()->user()->email ?? '' }}" placeholder="masukan email kamu" />
 
-                                    </div>
+                            </div>
 
                             <div>
                                 <input type="hidden" class="form-control" name="user_id"
-                                    value="{{ auth()->user()->id?? '' }}" readonly />
+                                    value="{{ auth()->user()->id ?? '' }}" readonly />
 
                             </div>
                             <div>
@@ -303,6 +310,66 @@
     <!-- end client section -->
 
     @include('landing_pages.footer')
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
+        integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function() {
+            // $('.select2').select2()
+            $('#inputHarga').maskMoney({
+                thousands: '.',
+                decimal: ',',
+                precision: 0,
+                allowZero: false,
+                allowNegative: false,
+            });
+        })
+    </script>
+
+<!-- JavaScript untuk implementasi show more dan show less -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const limit = 50; // Batas karakter
+        const textElement = document.getElementById('demoText');
+        const originalText = textElement.innerText;
+
+        // Cek apakah perlu tampilkan tombol show more
+        if (originalText.length > limit) {
+            const truncatedText = originalText.slice(0, limit) + '......';
+            const showMoreBtn = createButton('Show more ↓', 'btn-primary', function () {
+                textElement.innerText = originalText;
+                showMoreBtn.style.display = 'none';
+                showLessBtn.style.display = 'block';
+            });
+
+            // Sembunyikan teks asli dan tambahkan tombol show more
+            textElement.innerText = truncatedText;
+            textElement.insertAdjacentElement('afterend', showMoreBtn);
+
+            // Buat tombol show less dan sembunyikan
+            const showLessBtn = createButton('Show less ↑', 'btn-primary', function () {
+                textElement.innerText = truncatedText;
+                showMoreBtn.style.display = 'block';
+                showLessBtn.style.display = 'none';
+            });
+            showLessBtn.style.display = 'none';
+            textElement.insertAdjacentElement('afterend', showLessBtn);
+        }
+
+        // Fungsi untuk membuat tombol
+        function createButton(text, className, clickHandler) {
+            const button = document.createElement('button');
+            button.innerText = text;
+            button.className = 'btn ' + className;
+            button.addEventListener('click', clickHandler);
+            return button;
+        }
+    });
+</script>
 
     <!-- jQery -->
     <script src="{{ asset('/home/js/jquery-3.4.1.min.js') }}"></script>

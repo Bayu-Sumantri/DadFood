@@ -27,7 +27,7 @@ use App\Models\Pemesanan;
 */
 
 Route::get('/', function () {
-    
+
     $food = Food::all();
     $promo = MenuPromo::all();
 
@@ -62,13 +62,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//user create and destroy
+//user create and destroy and update
 Route::resource('Users','App\Http\Controllers\UserController');
+Route::patch('/user/{id}', [UserController::class, 'update'])->name('user.update');
 Route::delete('/delete/{id}', [UserController::class,"destroy"])->name('delate.destroy');
 Route::get('/edit_user/{id}', function (string $id) {
     $user=User::findOrFail($id);
     // return $user;
-    return view('admin_master.side_admin.user_edit', compact('user'));
+    return view('admin_master.admin_sup.edit.user_edit', compact('user'));
 })->name('user.edit');
 
 Route::get('/create_user', function () {
@@ -95,8 +96,9 @@ Route::resource('Food', 'App\Http\Controllers\FoodController');
 Route::get('/FoodCreate', [FoodController::class,"create"])->name('foodcreate'); // halaman create menu saja
 Route::get('/menu_show', function () {
     $food = Food::orderBy('nama_makanan', 'asc')->simplePaginate(10);
-    
-    return view('admin_master/admin_sup/menu_show', compact('food'));
+
+    return view('admin_mast
+    er/admin_sup/menu_show', compact('food'));
 })->name('menu_show');
 
 //promo menu
@@ -107,7 +109,7 @@ Route::get('/promomenu', function () {
 Route::get('/promocreate', [MenuPromoController::class,"create"])->name('promocreate'); // halaman create menu saja
 Route::get('/menu_promo', function () {
     $promo = MenuPromo::orderBy('nama_makanan', 'asc')->simplePaginate(10);
-    
+
     return view('admin_master/admin_sup/menu_promo/show_promo', compact('promo'));
 })->name('menu_promo');
 
@@ -145,7 +147,7 @@ Route::get('/pemesanan_food/{id}', function (string $id) {
 Route::post('/buat_pemesanan', [PemesananController::class, 'store'])->name('buat_pemesanan');
 
 
-// booking / reservasi table restoran 
+// booking / reservasi table restoran
 Route::resource('booking', 'App\Http\Controllers\BookingController');
 
 Route::get('/booking_table', [BookingController::class,"create"])->name('booking_table'); // halaman create menu saja
@@ -170,9 +172,18 @@ Route::get('/pemesanan_user', function () {
 
 // Route::delete('/delete/{id}', [PemesananController::class,"destroy"])->name('delate.pemesanan');
 
-// pembelia user 
+// pembelia user
 Route::resource('pembelian', 'App\Http\Controllers\PembelianController');
 Route::get('/pembelian_show', [PembelianController::class, 'index'])->name('pembelian_show');
+
+
+
+//show total pemesanan {admin}
+Route::get('/pemesanan_admin_show', function () {
+    $pemesanan = Pemesanan::simplePaginate(10);
+    // return $episode;
+    return view('admin_master.admin_sup.pembelian_admin_show', compact('pemesanan'));
+})->name('pemesanan_admin_show')->middleware(['auth']);
 
 
 

@@ -49,7 +49,7 @@
             <label for="rekening" id="rekeningLabel" style="display: none">Nomor Rekening Bank:</label>
             <input type="text" class="form-control" id="bank_form_muncul" style="display: none;" name="rekening_bank"
                 placeholder="Enter Your Rekening Bank">
-        </div>
+        </div>  
         <div class="form-floating">
             <textarea class="form-control" name="alamat_tujuan" placeholder="Leave a comment here" id="alamat_COD_muncul"
                 style="display: none" style="height: 100px"></textarea>
@@ -59,6 +59,10 @@
             <label for="telepon" id="teleponLabel" style="display: none">Nomor Telepon Dana:</label>
             <input type="text" class="form-control" id="dana_form_muncul" style="display: none;" name="nomor_dana"
                 placeholder="Enter Your Number Dana">
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="hidden" name="status" class="form-control" id="floatingInput" placeholder="99999" value="menunggu" readonly disabled>
         </div>
 
 

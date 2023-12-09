@@ -33,23 +33,25 @@ class PemesananController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        // Validasi input
         $data = $request->validate([
             'user_id' => ['required'],
             'id_makanan' => ['required'],
             'alamat_pengiriman' => ['required', 'max:255'],
-            'total_pemesanan' => ['required', 'max:255'],
+            'total_pemesanan' => ['required', 'numeric', 'not_in:0', 'max:9000'], // Menambahkan validasi numerik, tidak boleh 0, dan maksimal 9000
         ]);
 
+        // Menyimpan data pemesanan jika validasi sukses
         Pemesanan::create([
-            'user_id' => $request->user_id,
-            'id_makanan' => $request->id_makanan,
-            'alamat_pengiriman' => $request->alamat_pengiriman,
-            'total_pemesanan' => $request->total_pemesanan,
+            "user_id" => $request->user_id,
+            "id_makanan" => $request->id_makanan,
+            "alamat_pengiriman" => $request->alamat_pengiriman,
+            "total_pemesanan" => $request->total_pemesanan,
         ]);
 
-        return redirect(route('dashboard'))->with('success', 'successfully uploaded your anime');
+        return redirect(route('dashboard'))->with('success', "Pemesanan berhasil diunggah.");
     }
+
 
     /**
      * Display the specified resource.
@@ -87,6 +89,7 @@ class PemesananController extends Controller
             'nomor_dana' => $request->nomor_dana,
             'rekening_bank' => $request->rekening_bank,
             'alamat_tujuan' => $request->alamat_tujuan,
+            'status' => $request->status,
         ]);
 
         Alert::success('Berhasil', 'Success Payment');

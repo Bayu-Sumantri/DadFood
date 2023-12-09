@@ -60,7 +60,7 @@
                         <input-label for="password" :value="__('Password')" />
                         <input class="input100" type="password" name="password" id="inputPassword" required>
                         <span class="focus-input100" data-placeholder="Password"></span>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" /> 
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     <div class="container-login100-form-btn">
@@ -88,6 +88,25 @@
 
 
     <div id="dropDownSelect1"></div>
+
+    {{-- show password --}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const passwordInput = document.getElementById('inputPassword');
+            const showPassButtons = document.querySelectorAll('.btn-show-pass');
+
+            showPassButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                    } else {
+                        passwordInput.type = 'password';
+                    }
+                });
+            });
+        });
+    </script>
 
     <!--===============================================================================================-->
     <script src="{{ asset('/Login_V2/vendor/jquery/jquery-3.2.1.min.js') }}"></script>

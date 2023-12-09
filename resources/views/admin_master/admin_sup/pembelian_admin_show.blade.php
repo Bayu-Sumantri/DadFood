@@ -22,8 +22,6 @@
                         <th scope="col">Alamat</th>
                         <th scope="col">Total</th>
                         <th scope="col">Tanggal</th>
-                        <th scope="col">Payment</th>
-                        <th scope="col">Hapus</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,20 +37,6 @@
                             <td>{{ $row->alamat_pengiriman }}</td>
                             <td id="total_pembelian">{{ $row->total_pemesanan }} Porsi</td>
                             <td>{{ $row->created_at->diffForHumans() }}</td>
-                            <td>
-                                <form method="post"
-                                    onsubmit="return confirm('Apakah anda yakin akan menghapus Pemesanan, {{ $row->food->nama_makanan }}?..')"
-                                    action="{{ route('Pemesanan.destroy', $row->id) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="{{ route('Pemesanan.edit', $row->id) }}"
-								class="btn btn-info"><i class="far fa-edit"></i></a>
-							</td>
-							<td>
-								<button type="submit" class="btn btn-danger"><i
-									class="fa fa-trash"></i></button>
-
-								</td>
 							</form></td>
 
                     </tr>

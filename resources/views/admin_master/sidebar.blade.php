@@ -33,6 +33,7 @@
                             <a href="{{ route('promomenu') }}" class="dropdown-item">Menu Promo</a>
                             <a href="{{ route('menu_show') }}" class="dropdown-item">Menu Detail</a>
                             <a href="{{ route('pemesanan_show') }}" class="dropdown-item">Detail All Pemesanan</a>
+                            <a href="{{ route('pemesanan_show') }}" class="dropdown-item">All TRANSAKSI</a>
                         </div>
                     </div>
                 </div>
@@ -41,7 +42,7 @@
                     <div class="nav-item dropdown">
                         <a href="{{ url("#") }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>User</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="#" class="dropdown-item">Pembelian</a>
+                            <a href="{{ route('pembelian_show') }}" class="dropdown-item">Pembelian</a>
                             <a href="{{ route('pemesanan_user') }}" class="dropdown-item">Pemesanan</a>
                             <a href="#" class="dropdown-item">Transaksi</a>
                         </div>

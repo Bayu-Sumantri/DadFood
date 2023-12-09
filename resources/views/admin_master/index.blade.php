@@ -53,7 +53,7 @@
             <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-tv fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <a href="{{ route('dashboard') }}" class="mb-2">Total Booking</a>
+                    <a href="{{ route('pemesanan_admin_show') }}" class="mb-2">Total Booking</a>
                     <h6 class="mb-0">{{ $total_booking }} Booking</h6>
 
                 </div>

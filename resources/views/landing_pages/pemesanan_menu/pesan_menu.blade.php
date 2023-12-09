@@ -90,6 +90,7 @@
                             <h2 class="card-title">
                                 <center>Makanan {{ old('nama_makanan', $food->nama_makanan) }}</center>
                             </h2>
+                            @include('error.error')
                             <div class="form-group">
                                 {{-- <img src="{{ asset('/home/images/f4.png') }}" alt="Pizza, Burger, and Pizza"
                                     class="img-fluid img-center" disabled> --}}
@@ -102,8 +103,8 @@
                                     <p>Images Tidak ada</p>
                                 @endif
                             </div>
-                            <input type="text" name="id_makanan" value="{{ $food->id }}">
-                            <input type="text" name="user_id" value="{{ auth()->check() && auth()->user()->id }}">
+                            <input type="hidden" name="id_makanan" value="{{ $food->id }}">
+                            <input type="hidden" name="user_id" value="{{ auth()->check() && auth()->user()->id }}">
                             <div class="form-group">
                                 <h5 class="card-title">Deskripsi Singkat</h5>
                                 <input type="text" class="form-control" placeholder="Deskripsi Singkat" disabled
@@ -122,11 +123,12 @@
                             </div>
                             <div class="form-group">
                                 <h5 class="card-title">Porsi</h5>
-                                <input type="number" class="form-control" name="total_pemesanan" placeholder="Porsi">
+                                <input type="text" class="form-control" name="total_pemesanan" placeholder="Porsi" id="inputPorsi" oninput="validasiInput()">
+                                <small id="warningMessage" style="color: red;"></small>
                             </div>
                             <div class="form-group">
                                 <h5 class="card-title">Harga</h5>
-                                <input type="number" class="form-control" value="{{ old('harga', $food->harga) }}"
+                                <input type="text" class="form-control" id="inputHarga" value="{{ old('harga', $food->harga) }}"
                                     placeholder="Harga" disabled>
                                 <input type="hidden" class="form-control" name="status" value="Pending"
                                     placeholder="pending" disabled>
@@ -145,6 +147,69 @@
 
 
 </body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"
+integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+$(function () {
+  // Specify the IDs of the input fields
+  const inputHargaIds = ['#inputHarga', '#inputporsi'];
+
+  // Loop through each ID and apply maskMoney plugin
+  for (let i = 0; i < inputHargaIds.length; i++) {
+    $(inputHargaIds[i]).maskMoney({
+      thousands: '.',
+      decimal: ',',
+      precision: 0,
+      allowZero: false,
+      allowNegative: false,
+    });
+  }
+});
+
+
+function validasiInput() {
+        var inputPorsi = document.getElementById("inputPorsi").value;
+
+        // Cek apakah input hanya mengandung angka
+        if (!/^\d+$/.test(inputPorsi)) {
+            document.getElementById("warningMessage").innerHTML = "Mohon masukkan jumlah porsi dalam bentuk angka.";
+            document.getElementById("inputPorsi").value = "";  // Menghapus input jika terdapat huruf
+        } else {
+            document.getElementById("warningMessage").innerHTML = "";  // Menghapus pesan peringatan jika input valid
+        }
+    }
+
+</script>
+
+
+<script>
+        //harga total
+        document.addEventListener('DOMContentLoaded', function () {
+        const totalPemesananInput = document.querySelector('input[name="total_pemesanan"]');
+        const hargaInput = document.getElementById('inputHarga');
+
+        totalPemesananInput.addEventListener('input', function () {
+            const totalPemesanan = parseInt(totalPemesananInput.value) || 0;
+
+            if (totalPemesanan > 0) {
+                const hargaPerPorsi = parseFloat("{{ $food->harga }}") || 0;
+                const totalHarga = totalPemesanan * hargaPerPorsi;
+                hargaInput.value = formatCurrency(totalHarga);
+            } else {
+                // Jika porsi dihapus atau dikosongkan, reset nilai harga ke nilai semula
+                hargaInput.value = formatCurrency(parseFloat("{{ $food->harga }}") || 0);
+            }
+        });
+
+        // Function to format currency (you can modify this based on your needs)
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+        }
+    });
+</script>
 
 <!-- boostap 5 js -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">

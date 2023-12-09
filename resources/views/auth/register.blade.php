@@ -61,9 +61,10 @@
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
+                    <!-- HTML structure for password input with show/hide functionality -->
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
                         <span class="btn-show-pass">
-                            <i class="zmdi zmdi-eye"></i>
+                            <i class="zmdi zmdi-eye" id="togglePassword"></i>
                         </span>
                         <input-label for="password" :value="__('Password')" />
                         <input class="input100" type="password" name="password" id="inputPassword" required>
@@ -73,14 +74,15 @@
 
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
                         <span class="btn-show-pass">
-                            <i class="zmdi zmdi-eye"></i>
+                            <i class="zmdi zmdi-eye" id="toggleConfirmPassword"></i>
                         </span>
                         <input-label for="password_confirmation" :value="__('Confirm Password')" />
                         <input class="input100" type="password" name="password_confirmation" required
-                            autocomplete="new-password" id="inputPassword" required>
+                            autocomplete="new-password" id="inputPasswordConfirmation" required>
                         <span class="focus-input100" data-placeholder="Password"></span>
                         <input-error :messages="$errors - > get('password_confirmation')" class="mt-2" />
                     </div>
+
 
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">
@@ -107,6 +109,41 @@
 
 
     <div id="dropDownSelect1"></div>
+
+
+    {{-- show password --}}
+
+    <script>
+        // JavaScript logic for password show/hide functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the togglePassword and toggleConfirmPassword elements
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+
+            // Get the password and confirm password input elements
+            const passwordInput = document.getElementById('inputPassword');
+            const confirmPasswordInput = document.getElementById('inputPasswordConfirmation');
+
+            // Add event listeners to toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                togglePasswordVisibility(passwordInput);
+            });
+
+            toggleConfirmPassword.addEventListener('click', function() {
+                togglePasswordVisibility(confirmPasswordInput);
+            });
+
+            // Function to toggle password visibility
+            function togglePasswordVisibility(inputElement) {
+                const type = inputElement.getAttribute('type');
+                if (type === 'password') {
+                    inputElement.setAttribute('type', 'text');
+                } else {
+                    inputElement.setAttribute('type', 'password');
+                }
+            }
+        });
+    </script>
 
     <!--===============================================================================================-->
     <script src="{{ asset('/Login_V2/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
