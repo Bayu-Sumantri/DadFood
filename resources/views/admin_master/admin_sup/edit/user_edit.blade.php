@@ -23,19 +23,19 @@
                     value="{{ old('name', $user->name) }}">
                 <label for="floatingInput">Name</label>
             </div>
-            <div class="form-floating mb-3">
-                <select class="form-select" name="level" id="floatingSelect"
-                    aria-label="Floating label select example">
-                    @if ($user->level === 'admin')
-                        <option value="admin" selected>Admin</option>
-                        <option value="user">User</option>
-                    @else
-                        <option value="user" selected>User</option>
-                        <option value="admin">Admin</option>
-                    @endif
-                </select>
-                <label for="floatingSelect">Role Account</label>
-            </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" name="level" id="floatingSelect"
+                        aria-label="Floating label select example">
+                        @if ($user->level === 'admin')
+                            <option value="admin" selected>Admin</option>
+                            <option value="user">User</option>
+                        @else
+                            <option value="user" selected>User</option>
+                            <option value="admin">Admin</option>
+                        @endif
+                    </select>
+                    <label for="floatingSelect">Role Account</label>
+                </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>

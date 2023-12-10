@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PembelianController extends Controller
 {
@@ -46,7 +47,9 @@ class PembelianController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pembelian = Pembayaran::findOrFail($id);
+
+        return view('admin_master.admin_sup.edit.all_transaksi_edit', compact('pembelian'));
     }
 
     /**
@@ -54,7 +57,17 @@ class PembelianController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Find the user by ID
+        $pembelian = Pembayaran::findOrFail($id);
+
+        // Update user data
+        $pembelian->update([
+            'status' => $request->status,
+        ]);
+
+
+        Alert::success('Berhasil', 'Respon Sudah Diubah');
+        return redirect()->route('all_transaksi')->with('success');
     }
 
     /**

@@ -11,13 +11,12 @@ class Pemesanan extends Model
 {
     use HasFactory;
 
-    protected $table = "pemesanans"; 
+    protected $table = "pemesanans";
 
     protected $fillable = [
         "user_id",
         "id_makanan",
         "alamat_pengiriman",
-        "status",
         "total_pemesanan",
     ];
 
@@ -25,7 +24,7 @@ class Pemesanan extends Model
     {
         return $this->HasOne(pembayaran::class, 'id_pemesanan');
     }
-    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

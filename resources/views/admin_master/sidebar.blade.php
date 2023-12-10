@@ -33,7 +33,7 @@
                             <a href="{{ route('promomenu') }}" class="dropdown-item">Menu Promo</a>
                             <a href="{{ route('menu_show') }}" class="dropdown-item">Menu Detail</a>
                             <a href="{{ route('pemesanan_show') }}" class="dropdown-item">Detail All Pemesanan</a>
-                            <a href="{{ route('pemesanan_show') }}" class="dropdown-item">All TRANSAKSI</a>
+                            <a href="{{ route('all_transaksi') }}" class="dropdown-item">All TRANSAKSI</a>
                         </div>
                     </div>
                 </div>

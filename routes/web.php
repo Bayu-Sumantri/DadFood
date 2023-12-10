@@ -13,6 +13,7 @@ use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PembelianController;
 use App\Models\Booking;
 use App\Models\MenuPromo;
+use App\Models\Pembayaran;
 use App\Models\Pemesanan;
 
 /*
@@ -97,8 +98,7 @@ Route::get('/FoodCreate', [FoodController::class,"create"])->name('foodcreate');
 Route::get('/menu_show', function () {
     $food = Food::orderBy('nama_makanan', 'asc')->simplePaginate(10);
 
-    return view('admin_mast
-    er/admin_sup/menu_show', compact('food'));
+    return view('admin_master/admin_sup/menu_show', compact('food'));
 })->name('menu_show');
 
 //promo menu
@@ -186,6 +186,16 @@ Route::get('/pemesanan_admin_show', function () {
 })->name('pemesanan_admin_show')->middleware(['auth']);
 
 
+
+
+//show total pemesanan show and edit {admin}
+Route::get('/all_transaksi', function () {
+    $pembelian = Pembayaran::simplePaginate(10);
+
+    return view('admin_master.admin_sup.all_transaksi', compact('pembelian'));
+})->name('all_transaksi')->middleware(['auth']);
+
+Route::patch('/all_transaksi/{id}', [PembelianController::class, 'update'])->name('all_transaksi.update');
 
 
 

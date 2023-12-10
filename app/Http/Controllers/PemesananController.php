@@ -82,15 +82,14 @@ class PemesananController extends Controller
             'alamat_pengiriman' => $request->alamat_pengiriman,
         ]);
 
-        $pemesanan->pembayaran()->create([
-            'id_makanan' => $request->id_makanan,
-            'id_pemesanan' => $request->id_pemesanan,
-            'metode_pembayaran' => $request->metode_pembayaran,
-            'nomor_dana' => $request->nomor_dana,
-            'rekening_bank' => $request->rekening_bank,
-            'alamat_tujuan' => $request->alamat_tujuan,
-            'status' => $request->status,
-        ]);
+            $pemesanan->pembayaran()->create([
+                'id_makanan' => $request->id_makanan,
+                'id_pemesanan' => $request->id_pemesanan,
+                'metode_pembayaran' => $request->metode_pembayaran,
+                'nomor_dana' => $request->nomor_dana,
+                'rekening_bank' => $request->rekening_bank,
+                'alamat_tujuan' => $request->alamat_tujuan,
+            ]);
 
         Alert::success('Berhasil', 'Success Payment');
         return redirect(route('pembelian_show'))->with('success', 'Item updated successfully');
