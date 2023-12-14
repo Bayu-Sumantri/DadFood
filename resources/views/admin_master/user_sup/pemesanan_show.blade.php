@@ -4,6 +4,9 @@
     Dashboard
 @endsection
 
+@include('sweetalert::alert')
+
+
 <div class="container-fluid pt-4 px-4">
     <div class="bg-secondary rounded h-100 p-4">
 
@@ -27,43 +30,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        @foreach ($pemesanan as $row)
-                            <th scope="row">
-                                {{ $loop->iteration + $pemesanan->perpage() * ($pemesanan->currentPage() - 1) }}</th>
+                    @forelse ($pemesanan as $row)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $row->user->name }}</td>
                             <td>{{ $row->user->email }}</td>
                             <td>{{ $row->food->nama_makanan }}</td>
                             <td>{{ $row->food->deskripsi_singkat }}</td>
-                            <td id="harga">{{ $row->food->harga }}</td>
+                            <td>Rp{{ number_format($row->food->harga, 2, ",", ".") }}</td>
                             <td>{{ $row->alamat_pengiriman }}</td>
                             <td id="total_pembelian">{{ $row->total_pemesanan }} Porsi</td>
                             <td>{{ $row->created_at->diffForHumans() }}</td>
                             <td>
-                                <form method="post"
-                                    onsubmit="return confirm('Apakah anda yakin akan menghapus Pemesanan, {{ $row->food->nama_makanan }}?..')"
+                                @if (!$row->pembayaran?->metode_pembayaran)
+                                    <a href="{{ route('Pemesanan.edit', $row->id) }}" class="btn btn-info">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                @endif
+                            </td>
+                            <td>
+                                <form method="post" onsubmit="return confirm('Apakah anda yakin akan menghapus Pemesanan, {{ $row->food->nama_makanan }}?..')"
                                     action="{{ route('Pemesanan.destroy', $row->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('Pemesanan.edit', $row->id) }}"
-								class="btn btn-info"><i class="far fa-edit"></i></a>
-							</td>
-							<td>
-								<button type="submit" class="btn btn-danger"><i
-									class="fa fa-trash"></i></button>
-
-								</td>
-							</form></td>
-
-                    </tr>
-                    @endforeach
-
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="11" style="text-align: center">Anda belum melakukan pemesanan!!!</td>
+                        </tr>
+                    @endforelse
+                </tbody>
             </table>
+
         </div>
 
     </div>
 
-    <script>
+     {{-- <script>
         document.addEventListener('DOMContentLoaded', function () {
             const hargaElement = document.getElementById('harga');
             const totalPembelianElement = document.getElementById('total_pembelian');
@@ -84,8 +92,7 @@
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
             }
         });
-    </script>
-
+    </script> --}}
 
 
 

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AdduserSeeder extends Seeder
@@ -13,19 +14,22 @@ class AdduserSeeder extends Seeder
      */
     public function run(): void
     {
-                User::create([
-            "name"           => "bayu", 
-            "email"          => "bayu@gmail.com", 
+        $user = User::create([
+            "name"           => "bayu",
+            "email"          => "bayu@gmail.com",
             "Profile"          => "",
-            "level"          => "Admin", 
-            "password"       => \bcrypt('bayu12345')
+            "password"       => \bcrypt('bayu12345'),
+            "remember_token"    => Str::random(10)
         ]);
-        User::create([
-            "name"           => "BlackCat", 
-            "email"          => "BlackCat@gmail.com", 
+        $user->assignRole('user');
+        $user = User::create([
+            "name"           => "BlackCat",
+            "email"          => "BlackCat@gmail.com",
             "Profile"          => "",
-            "level"          => "Admin", 
-            "password"       => \bcrypt('admin123')
+            "password"       => \bcrypt('admin123'),
+            'remember_token'    => Str::random(10)
          ]);
+         $user->assignRole('admin');
     }
+
 }

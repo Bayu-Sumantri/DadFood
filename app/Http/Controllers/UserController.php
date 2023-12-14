@@ -36,15 +36,26 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'password' => 'required',
-            'level' => 'required|string|max:255',
+            'level' => 'required',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'level' => $request->level,
         ]);
+
+        // Berikan akses admin jika level yang dipilih adalah 'admin'
+        if ($request->level == 'admin') {
+            // Menggunakan Spatie\Permission, berikan pengguna peran 'admin'
+            $user->assignRole('admin');
+
+            // Jika level bukan 'admin', berikan pengguna peran 'user'
+        } elseif ($request->level == 'user') {
+            // Menggunakan Spatie\Permission, berikan pengguna peran 'user'
+            $user->assignRole('user');
+        }
+
         return redirect()->route('Users.index')->with('success', "successfully Create user");
     }
 

@@ -8,7 +8,7 @@
     <div class="bg-secondary rounded h-100 p-4">
 
 
-        <h6 class="mb-4">Pembelian Users</h6>
+        <h6 class="mb-4">Transaksi Users</h6>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -18,9 +18,10 @@
                         <th scope="col">NO PEMESANAN</th>
                         <th scope="col">PEMBAYARAN</th>
                         <th scope="col">NO PEMBAYARAN</th>
+                        <th scope="col">TOTAL</th>
                         <th scope="col">HARGA</th>
-                        <th scope="col">STATUS</th>
                         <th scope="col">TANGGAL PEMBAYARAN</th>
+                        <th scope="col">CETAK RESI</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,40 +41,23 @@
                                     {{ $row->alamat_tujuan }}
                                 @endif
                             </td>
+                            <td>{{ $row->pemesanan->total_pemesanan }}</td>
                             <td>{{ $row->food->harga }}</td>
-                            <td>
-                                @if($row->status === 'menunggu')
-                                    <div class="badge bg-info text-wrap" style="width: 6rem;">
-                                        {{ $row->status }}
-                                    </div>
-                                @elseif($row->status === 'perjalanan')
-                                    <div class="badge bg-warning text-wrap" style="width: 6rem;">
-                                        {{ $row->status }}
-                                    </div>
-                                @elseif($row->status === 'selesai')
-                                    <div class="badge bg-success text-wrap" style="width: 6rem;">
-                                        {{ $row->status }}
-                                    </div>
-                                @else
-                                    <!-- Handle other status conditions if needed -->
-                                    <div class="badge bg-secondary text-wrap" style="width: 6rem;">
-                                        Unknown Status
-                                    </div>
-                                @endif
-                            </td>
                             <td>{{ $row->created_at->diffForHumans() }}</td>
+                            <td><a href="{{ route('resi_pembelian', $row->id) }}" class="btn btn-info" target="_blank"><i class="fas fa-print"></i></a></td>
+
 							</form></td>
 
                     </tr>
                     @empty
-                        <tr>
-                            <td colspan="11" style="text-align: center">Anda belum melakukan pembelian!!!</td>
-                        </tr>
-                    @endforelse
-
-                </tbody>
+                    <tr>
+                        <td colspan="11" style="text-align: center">Anda belum melakukan transaksi!!!</td>
+                    </tr>
+                @endforelse
+            </tbody>
 
             </table>
+            {{ $pembelian->links() }}
         </div>
 
     </div>

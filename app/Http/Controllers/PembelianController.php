@@ -13,8 +13,15 @@ class PembelianController extends Controller
      */
     public function index()
     {
-        $pembelian = Pembayaran::orderBy('metode_pembayaran', 'asc')->simplePaginate(3);
+        $pembelian = Pembayaran::whereHas('pemesanan', function ($query) {
+            $query->whereHas('user', function ($query1) {
+                return $query1->where('id', auth()->id());
+            });
+        })->paginate('10');
+
         $total_pembayaran = Pembayaran::count();
+
+
         return view('admin_master.user_sup.pembelian.index',compact('pembelian'));
     }
 

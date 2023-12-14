@@ -32,6 +32,29 @@ cd BudheFood
 code .
 ```
 
+**Instalasi Dependensi**
+
+```shell
+composer install
+```
+
+```shell
+npm install
+```
+
+**Konfigurasi Environment**
+
+```shell
+cp .env.example .env
+```
+
+**Generate Key Aplikasi**
+
+```shell
+php artisan key:generate
+```
+
+
 
 **Setting Database Config in Env**
 
@@ -50,7 +73,6 @@ DB_PASSWORD=
 
 ```shell
 php artisan storage:link
-cp .env.example .env
 ```
 
 **Run Local Server**

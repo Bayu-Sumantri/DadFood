@@ -43,7 +43,7 @@
 
                 <div class="container" style="margin-top: 15px;">
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Poster Anime</label>
+                        <label for="formFile" class="form-label">Your Profile <red style="color: red; font-size: 10px">Onlly 2Mb*</red></label>
                         <input class="form-control bg-dark" type="file" id="formFile" name="Profile">
                     </div>
                     <button type="submit" class="btn btn-primary" style="margin: 5px; font-size: 12px;">Save</button>

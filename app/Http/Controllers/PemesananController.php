@@ -82,14 +82,14 @@ class PemesananController extends Controller
             'alamat_pengiriman' => $request->alamat_pengiriman,
         ]);
 
-            $pemesanan->pembayaran()->create([
-                'id_makanan' => $request->id_makanan,
-                'id_pemesanan' => $request->id_pemesanan,
-                'metode_pembayaran' => $request->metode_pembayaran,
-                'nomor_dana' => $request->nomor_dana,
-                'rekening_bank' => $request->rekening_bank,
-                'alamat_tujuan' => $request->alamat_tujuan,
-            ]);
+        $pemesanan->pembayaran()->create([
+            'id_makanan' => $request->id_makanan,
+            'id_pemesanan' => $request->id_pemesanan,
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'nomor_dana' => $request->nomor_dana,
+            'rekening_bank' => $request->rekening_bank,
+            'alamat_tujuan' => $request->alamat_tujuan,
+        ]);
 
         Alert::success('Berhasil', 'Success Payment');
         return redirect(route('pembelian_show'))->with('success', 'Item updated successfully');
@@ -102,8 +102,11 @@ class PemesananController extends Controller
     {
         $data = Pemesanan::findOrfail($id);
         // return $pemesanan;
-        $data->delete($id);
+        // Hapus data terkait di tabel pembayarans
+        $data->pembayaran()->delete();
 
+        // Hapus data di tabel pemesanans
+        $data->delete();
         Alert::success('Berhasil', 'Success Delete');
         return back()->with('success');
     }

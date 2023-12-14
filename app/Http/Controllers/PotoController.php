@@ -55,21 +55,21 @@ class PotoController extends Controller
     {
         {
             $request->validate([
-                'Profile'  => 'required|image|mimes:jpeg,png,jpg,gif|max:7048',
+                'Profile'  => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
-    
-            
+
+
             if ($user->profile) {
                 // Menghapus profil pengguna jika ada
                 Storage::delete($user->profile);
             }
             $path = $request->file('Profile')->store('Profile');
-    
-    
+
+
             $user->update([
                 "Profile"  => $path
             ]);
-    
+
             return redirect()->route('admin.user.Myprofile');
         }
     }

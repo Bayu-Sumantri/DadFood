@@ -18,10 +18,10 @@ class BookingController extends Controller
             // Jika belum login, arahkan ke form login
             return redirect('/login');
         }
-    
+
         // Jika sudah login, lanjutkan proses dan masukan ke menu dashboard
         $booking = Booking::orderBy('name', 'asc')->get();
-    
+
         return view('landing_pages.master', compact('booking'));
     }
 
@@ -49,7 +49,7 @@ class BookingController extends Controller
             'tanggal_reservasi'         => ['required', 'string', 'max:255'],
             'table_name'                => ['required', 'string', 'max:255'],
         ]);
-        
+
         Booking::create([
             "user_id"                   => $user_Id,
             'name'                      => $request->name,
@@ -93,6 +93,11 @@ class BookingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Booking::findOrfail($id);
+        // return $pemesanan;
+        $data->delete($id);
+
+        Alert::success('Berhasil', 'Success Delete');
+        return back()->with('success');
     }
 }

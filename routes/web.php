@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Cetak_resi_transaksiController;
 use App\Models\Food;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,7 @@ Route::get('/', function () {
     $food = Food::all();
     $promo = MenuPromo::all();
 
-    return view('landing_pages.index', compact('food','promo'));
+    return view('landing_pages.index', compact('food', 'promo'));
 });
 
 
@@ -54,7 +55,7 @@ Route::get('/dashboard', function () {
     $total_users = User::count();
     $total_pemesanan = Pemesanan::count();
     $total_booking = Booking::count();
-    return view('admin_master.index', compact('total_users','total_food','total_promo', 'total_pemesanan', 'total_booking'));
+    return view('admin_master.index', compact('total_users', 'total_food', 'total_promo', 'total_pemesanan', 'total_booking'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -64,11 +65,11 @@ Route::middleware('auth')->group(function () {
 });
 
 //user create and destroy and update
-Route::resource('Users','App\Http\Controllers\UserController');
+Route::resource('Users', 'App\Http\Controllers\UserController');
 Route::patch('/user/{id}', [UserController::class, 'update'])->name('user.update');
-Route::delete('/delete/{id}', [UserController::class,"destroy"])->name('delate.destroy');
+Route::delete('/delete/{id}', [UserController::class, "destroy"])->name('delate.destroy');
 Route::get('/edit_user/{id}', function (string $id) {
-    $user=User::findOrFail($id);
+    $user = User::findOrFail($id);
     // return $user;
     return view('admin_master.admin_sup.edit.user_edit', compact('user'));
 })->name('user.edit');
@@ -94,7 +95,7 @@ Route::get('/create_menu', function () {
 })->name('create_menu');
 
 Route::resource('Food', 'App\Http\Controllers\FoodController');
-Route::get('/FoodCreate', [FoodController::class,"create"])->name('foodcreate'); // halaman create menu saja
+Route::get('/FoodCreate', [FoodController::class, "create"])->name('foodcreate'); // halaman create menu saja
 Route::get('/menu_show', function () {
     $food = Food::orderBy('nama_makanan', 'asc')->simplePaginate(10);
 
@@ -106,7 +107,7 @@ Route::resource('Promo', 'App\Http\Controllers\MenuPromoController');
 Route::get('/promomenu', function () {
     return view('admin_master/admin_sup/menu_promo/index');
 })->name('promomenu');
-Route::get('/promocreate', [MenuPromoController::class,"create"])->name('promocreate'); // halaman create menu saja
+Route::get('/promocreate', [MenuPromoController::class, "create"])->name('promocreate'); // halaman create menu saja
 Route::get('/menu_promo', function () {
     $promo = MenuPromo::orderBy('nama_makanan', 'asc')->simplePaginate(10);
 
@@ -117,7 +118,7 @@ Route::get('/edit_promoZ/{id}', function (string $id) {
     $promo = MenuPromo::findOrFail($id);
     $allpromo = MenuPromo::all();
     // return $episode;
-    return view('admin_master.admin_sup.menu_promo.edit_promo', compact('promo','allpromo'));
+    return view('admin_master.admin_sup.menu_promo.edit_promo', compact('promo', 'allpromo'));
 })->name('edit_promo');
 
 
@@ -127,7 +128,7 @@ Route::get('/edit_menu/{id}', function (string $id) {
     $food = Food::findOrFail($id);
     $allfood = Food::all();
     // return $episode;
-    return view('admin_master.admin_sup.edit/edit_menu', compact('food','allfood'));
+    return view('admin_master.admin_sup.edit/edit_menu', compact('food', 'allfood'));
 })->name('edit_menu');
 Route::patch('/edit_menuFood/{id}', [FoodController::class, 'update'])->name('edit_menuFood');
 
@@ -141,7 +142,7 @@ Route::get('/pemesanan_food/{id}', function (string $id) {
     $food = Food::findOrFail($id);
     $allfood = Food::all();
     // return $episode;
-    return view('landing_pages.pemesanan_menu.pesan_menu', compact('food','allfood'));
+    return view('landing_pages.pemesanan_menu.pesan_menu', compact('food', 'allfood'));
 })->name('pemesanan_food')->middleware(['auth']);
 
 Route::post('/buat_pemesanan', [PemesananController::class, 'store'])->name('buat_pemesanan');
@@ -150,7 +151,7 @@ Route::post('/buat_pemesanan', [PemesananController::class, 'store'])->name('bua
 // booking / reservasi table restoran
 Route::resource('booking', 'App\Http\Controllers\BookingController');
 
-Route::get('/booking_table', [BookingController::class,"create"])->name('booking_table'); // halaman create menu saja
+Route::get('/booking_table', [BookingController::class, "create"])->name('booking_table'); // halaman create menu saja
 
 
 // pemesanan AdminShow
@@ -163,11 +164,17 @@ Route::get('/pemesanan_show', function () {
 
 // pemesanan User
 Route::get('/pemesanan_user', function () {
-    $pemesanan = Pemesanan::simplePaginate(10);
-    // return $episode;
+    // $pemesanan = Pemesanan::paginate(10);
+
+    // Mengambil data pemesanan
+    $pemesanan = Pemesanan::whereHas('user', function ($query) {
+        // Menerapkan kondisi where pada relasi 'user'
+        return $query->where('id', auth()->id());
+    })->with('pembayaran')->paginate('10');
+
     return view('admin_master.user_sup.pemesanan_show', compact('pemesanan'));
 })->name('pemesanan_user')->middleware(['auth']);
-    Route::patch('/pemesanan_payment/{id}', [PemesananController::class, 'update'])->name('pemesanan_payment.update');
+Route::patch('/pemesanan_payment/{id}', [PemesananController::class, 'update'])->name('pemesanan_payment.update');
 
 
 // Route::delete('/delete/{id}', [PemesananController::class,"destroy"])->name('delate.pemesanan');
@@ -199,8 +206,51 @@ Route::patch('/all_transaksi/{id}', [PembelianController::class, 'update'])->nam
 
 
 
+//show transaksi user CRUD
+Route::get('/transaksi_user_show', function () {
+    $pembelian = Pembayaran::whereHas('pemesanan', function ($query) {
+        $query->whereHas('user', function ($query1) {
+            return $query1->where('id', auth()->id());
+        });
+    })->paginate(10); // Tambahkan paginate(10) untuk membatasi jumlah item per halaman
+
+    return view('admin_master.user_sup.cetak_resi.cetak_resi', compact('pembelian'));
+})->name('transaksi_user_show')->middleware(['auth']);
 
 
 
 
-require __DIR__.'/auth.php';
+Route::get('/resi_pembelian/{id}', function (string $id) {
+    $pembelian = Pembayaran::findOrFail($id);
+    // $transaksi = Transaksi::all();
+    // return $episode;
+    return view('admin_master.user_sup.cetak_resi.cetak_resi_full', compact('pembelian'));
+})->name('resi_pembelian');
+
+
+//booking user admin
+
+Route::resource('booking', 'App\Http\Controllers\BookingController');
+
+Route::get('/booking', function () {
+    $booking = Booking::simplePaginate(10);
+
+    return view('admin_master.user_sup.booking_show', compact('booking'));
+})->name('booking')->middleware(['auth']);
+
+//cetak resi booking
+Route::get('cetakPDF_booking/{id}', [Cetak_resi_transaksiController::class, "cetakPDF_booking"])->name('cetakPDF_booking');
+
+
+
+
+
+
+
+
+
+
+
+
+
+require __DIR__ . '/auth.php';

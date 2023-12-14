@@ -37,29 +37,29 @@
         </div>
 
         <div class="form-floating mb-3">
-            <select class="form-select" aria-label="Default select example" name="metode_pembayaran">
-                <option id="metode" selected>Methode Pembayaran</option>
-                <option value="dana" id="dana_muncul">Dana</option>
-                <option value="bank" id="bank_muncul">Bank</option>
-                <option value="COD" id="alamat_COD">COD(Cash On Delivery)</option>
+            <select class="form-select" aria-label="Default select example" name="metode_pembayaran" id="metode_pembayaran">
+                <option value="default" selected>Methode Pembayaran</option>
+                <option value="dana">Dana</option>
+                <option value="bank">Bank</option>
+                <option value="COD">COD (Cash On Delivery)</option>
             </select>
         </div>
 
         <div class="mb-3">
             <label for="rekening" id="rekeningLabel" style="display: none">Nomor Rekening Bank:</label>
-            <input type="text" class="form-control" id="bank_form_muncul" style="display: none;" name="rekening_bank"
-                placeholder="Enter Your Rekening Bank">
-        </div>  
-        <div class="form-floating">
-            <textarea class="form-control" name="alamat_tujuan" placeholder="Leave a comment here" id="alamat_COD_muncul"
-                style="display: none" style="height: 100px"></textarea>
-            <label for="floatingTextarea2" id="alamat_COD_muncul" class="d-none">Alamat Pengiriman</label>
+            <input type="text" class="form-control" id="bank_form_muncul" style="display: none;" name="rekening_bank" placeholder="Enter Your Rekening Bank">
         </div>
+
+        <div class="form-floating">
+            <textarea class="form-control" name="alamat_tujuan" placeholder="Leave a comment here" id="alamat_COD_muncul" style="display: none; height: 100px"></textarea>
+            <label for="alamat_COD_muncul_label" class="d-none">Alamat Pengiriman</label>
+        </div>
+
         <div class="mb-3">
             <label for="telepon" id="teleponLabel" style="display: none">Nomor Telepon Dana:</label>
-            <input type="text" class="form-control" id="dana_form_muncul" style="display: none;" name="nomor_dana"
-                placeholder="Enter Your Number Dana">
+            <input type="text" class="form-control" id="dana_form_muncul" style="display: none;" name="nomor_dana" placeholder="Enter Your Number Dana">
         </div>
+
 
         <div class="form-floating mb-3">
             <input type="hidden" name="status" class="form-control" id="floatingInput" placeholder="99999" value="menunggu" readonly disabled>
@@ -72,39 +72,32 @@
     </div>
 </div>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.js"></script>
-
+{{-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.js"></script> --}}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function() {
         let previouslySelectedForm = null;
 
-        $("#dana_muncul").click(function() {
+        $("#metode_pembayaran").change(function() {
             if (previouslySelectedForm !== null) {
-                $(previouslySelectedForm).hide("slow");
+                previouslySelectedForm.hide("slow");
             }
 
-            $("#dana_form_muncul").show("slow");
-            previouslySelectedForm = $("#dana_form_muncul");
-        });
+            let selectedValue = $(this).val();
 
-        $("#bank_muncul").click(function() {
-            if (previouslySelectedForm !== null) {
-                $(previouslySelectedForm).hide("slow");
+            if (selectedValue === "dana") {
+                $("#dana_form_muncul").show("slow");
+                previouslySelectedForm = $("#dana_form_muncul");
+            } else if (selectedValue === "bank") {
+                $("#bank_form_muncul").show("slow");
+                previouslySelectedForm = $("#bank_form_muncul");
+            } else if (selectedValue === "COD") {
+                $("#alamat_COD_muncul").show("slow");
+                previouslySelectedForm = $("#alamat_COD_muncul");
             }
-
-            $("#bank_form_muncul").show("slow");
-            previouslySelectedForm = $("#bank_form_muncul");
-        });
-
-        $("#alamat_COD").click(function() {
-            if (previouslySelectedForm !== null) {
-                $(previouslySelectedForm).hide("slow");
-            }
-
-            $("#alamat_COD_muncul").show("slow");
-            previouslySelectedForm = $("#alamat_COD_muncul");
         });
     });
 </script>
+
 </body>
 @endsection
