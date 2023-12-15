@@ -42,7 +42,7 @@
                         Login
                     </span>
                     <span class="login100-form-title p-b-48">
-                        <i class="zmdi zmdi-memory"></i>
+                        <i class="zmdi zmdi-account-add"></i>
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid nama is: abshv">

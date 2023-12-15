@@ -21,11 +21,11 @@ class Cetak_resi_transaksiController extends Controller
     return view('report_user.index',compact('user'));
     }
 
-    public function cetakPDF()
+    public function cetakPDF(string $id)
     {
-        $R_user = User::orderby('created_at','DESC')->get();
-        $pdf = Pdf::loadview('admin_master.user_sup.cetak_resi.cetak_resi', compact('R_user'));
-        // return $R_user;
+        $pembelian = Pembayaran::findOrfail($id);
+        $pdf = Pdf::loadview('admin_master.user_sup.cetak_resi.cetak_resi_full', compact('pembelian'));
+
         return $pdf->stream();
     }
 
@@ -33,7 +33,7 @@ class Cetak_resi_transaksiController extends Controller
     {
         $booking = Booking::findOrfail($id);
         $pdf = Pdf::loadview('admin_master.user_sup.cetak_bukti_resi.cetak_bukti_resi_full', compact('booking'));
-        // return $R_user;
+
         return $pdf->stream();
     }
 

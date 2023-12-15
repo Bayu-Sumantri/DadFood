@@ -44,7 +44,7 @@
                             <td>{{ $row->pemesanan->total_pemesanan }}</td>
                             <td>{{ $row->food->harga }}</td>
                             <td>{{ $row->created_at->diffForHumans() }}</td>
-                            <td><a href="{{ route('resi_pembelian', $row->id) }}" class="btn btn-info" target="_blank"><i class="fas fa-print"></i></a></td>
+                            <td><a href="{{ route('cetakPDF', $row->id) }}" class="btn btn-info" target="_blank"><i class="fas fa-print"></i></a></td>
 
 							</form></td>
 

@@ -217,15 +217,16 @@ Route::get('/transaksi_user_show', function () {
     return view('admin_master.user_sup.cetak_resi.cetak_resi', compact('pembelian'));
 })->name('transaksi_user_show')->middleware(['auth']);
 
+Route::get('cetakPDF/{id}', [Cetak_resi_transaksiController::class, "cetakPDF"])->name('cetakPDF');
 
 
 
-Route::get('/resi_pembelian/{id}', function (string $id) {
-    $pembelian = Pembayaran::findOrFail($id);
-    // $transaksi = Transaksi::all();
-    // return $episode;
-    return view('admin_master.user_sup.cetak_resi.cetak_resi_full', compact('pembelian'));
-})->name('resi_pembelian');
+// Route::get('/resi_pembelian/{id}', function (string $id) {
+//     $pembelian = Pembayaran::findOrFail($id);
+//     // $transaksi = Transaksi::all();
+//     // return $episode;
+//     return view('admin_master.user_sup.cetak_resi.cetak_resi_full', compact('pembelian'));
+// })->name('resi_pembelian');
 
 
 //booking user admin

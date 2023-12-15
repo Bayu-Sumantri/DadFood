@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Data User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Resi Transaksi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
-    <h3> Data User</h3>
+    <h3> Transaksi Lunas</h3>
     </hr>
     <table style="width:100%">
         <thead>
@@ -20,20 +21,42 @@
                 <td bgcolor="yellow" width="5%" class="center">Harga</td>
                 <td bgcolor="yellow" width="5%" class="center">Harga Total</td>
                 <td bgcolor="red" width="5%" class="center">Alamat Pemesanan</td>
-                <td bgcolor="red" width="5%" class="center">Update Account</td>
+                <td bgcolor="red" width="5%" class="center">Status</td>
+                <td bgcolor="red" width="5%" class="center">Create At</td>
             </tr>
         </thead>
         <tbody>
 
-                <tr>
-                    <td>{{ $pembelian->pemesanan->user->name }}</td>
-                    <td>{{ $pembelian->food->nama_makanan  }}</td>
-                    <td id="total_pembelian">{{ $pembelian->pemesanan->total_pemesanan  }}</td>
-                    <td id="harga">{{ $pembelian->food->harga }}</td>
-                    <td id="total_harga"></td>
-                    <td>{{ $pembelian->pemesanan->alamat_pengiriman }}</td>
-                    <td>{{ $pembelian->created_at }}</td>
-                </tr>
+            <tr>
+                <td>{{ $pembelian->pemesanan->user->name }}</td>
+                <td>{{ $pembelian->food->nama_makanan }}</td>
+                <td>{{ $pembelian->pemesanan->total_pemesanan }} Porsi</td>
+                <td>Rp{{ number_format($pembelian->food->harga, 2, ',', '.') }}</td>
+                <td>Rp{{ number_format($pembelian->pemesanan->total_pemesanan * $pembelian->food->harga, 2, ',', '.') }}
+                </td>
+                <td>{{ $pembelian->pemesanan->alamat_pengiriman }}</td>
+                <td>
+                    @if ($pembelian->status === 'menunggu')
+                        <div class="badge bg-info text-wrap" style="width: 6rem;">
+                            {{ $pembelian->status }}
+                        </div>
+                    @elseif($pembelian->status === 'perjalanan')
+                        <div class="badge bg-warning text-wrap" style="width: 6rem;">
+                            {{ $pembelian->status }}
+                        </div>
+                    @elseif($pembelian->status === 'selesai')
+                        <div class="badge bg-success text-wrap" style="width: 6rem;">
+                            {{ $pembelian->status }}
+                        </div>
+                    @else
+                        <!-- Handle other status conditions if needed -->
+                        <div class="badge bg-secondary text-wrap" style="width: 6rem;">
+                            Unknown Status
+                        </div>
+                    @endif
+                </td>
+                <td>{{ $pembelian->created_at }}</td>
+            </tr>
 
         </tbody>
     </table>
@@ -55,7 +78,7 @@
         @endif
 </body>
 
-     <script>
+{{-- <script>
         document.addEventListener('DOMContentLoaded', function () {
             const hargaElement = document.getElementById('harga');
             const totalPembelianElement = document.getElementById('total_pembelian');
@@ -76,9 +99,13 @@
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
             }
         });
-    </script>
+    </script> --}}
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+</script>
 
 </html>
