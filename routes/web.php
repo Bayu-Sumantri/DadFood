@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\Cetak_resi_transaksiController;
 use App\Models\Food;
 use App\Models\User;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FoodController;
-use App\Http\Controllers\MenuPromoController;
-use App\Http\Controllers\PotoController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PemesananController;
-use App\Http\Controllers\PembelianController;
 use App\Models\Booking;
 use App\Models\MenuPromo;
-use App\Models\Pembayaran;
 use App\Models\Pemesanan;
+use App\Models\Pembayaran;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FoodController;
+use App\Http\Controllers\PotoController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MenuPromoController;
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\Cetak_resi_transaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +53,14 @@ Route::get('/About', function () {
 Route::get('/dashboard', function () {
     $total_food = Food::count();
     $total_promo = MenuPromo::count();
-    $total_users = User::count();
     $total_pemesanan = Pemesanan::count();
+    $total_users = User::count();
     $total_booking = Booking::count();
-    return view('admin_master.index', compact('total_users', 'total_food', 'total_promo', 'total_pemesanan', 'total_booking'));
+
+    // Check if the authenticated user is an admin
+    $isAdmin = Auth::check() && Auth::user()->roles->contains('name', 'admin');
+
+    return view('admin_master.index', compact('total_food', 'total_promo', 'total_pemesanan', 'total_users', 'total_booking', 'isAdmin'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -238,6 +243,12 @@ Route::get('/booking', function () {
 
     return view('admin_master.user_sup.booking_show', compact('booking'));
 })->name('booking')->middleware(['auth']);
+
+Route::get('/booking_admin', function () {
+    $booking = Booking::simplePaginate(10);
+
+    return view('admin_master.admin_sup.all_booking', compact('booking'));
+})->name('booking_admin')->middleware(['auth']);
 
 //cetak resi booking
 Route::get('cetakPDF_booking/{id}', [Cetak_resi_transaksiController::class, "cetakPDF_booking"])->name('cetakPDF_booking');

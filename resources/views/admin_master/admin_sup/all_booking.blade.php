@@ -11,7 +11,7 @@
     <div class="bg-secondary rounded h-100 p-4">
 
 
-        <h6 class="mb-4">Booking Users</h6>
+        <h6 class="mb-4">Booking All</h6>
         <div class="table-responsive">
             <table class="table">
                 <thead>

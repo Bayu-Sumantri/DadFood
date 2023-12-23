@@ -42,32 +42,47 @@
                       class="fas fa-chart-line me-2"></i>Dashboard</a>
               @role('admin')
                   <div class="nav-item dropdown">
-                      <a href="{{ url('#') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-bars me-2"></i>Admin</a>
+                      <a href="{{ url('#') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                              class="fas fa-bars me-2"></i>Admin</a>
                       <div class="dropdown-menu bg-transparent border-0">
                           <a href="{{ route('Users.index') }}" class="dropdown-item">User's</a>
                           <a href="{{ route('create_menu') }}" class="dropdown-item">Menu Makanan</a>
                           <a href="{{ route('promomenu') }}" class="dropdown-item">Menu Promo</a>
                           <a href="{{ route('menu_show') }}" class=
 
-                          "dropdown-item">Menu Detail</a>
+                          "dropdown-item">Menu
+                              Detail</a>
                           <a href="{{ route('pemesanan_show') }}" class="dropdown-item">Detail All Pemesanan</a>
                           <a href="{{ route('all_transaksi') }}" class="dropdown-item">All TRANSAKSI</a>
+                          <a href="{{ route('booking_admin') }}" class="dropdown-item">All BOOKING</a>
                       </div>
                   </div>
               @endrole
           </div>
 
-          <div class="navbar-nav w-100">
-              <div class="nav-item dropdown">
-                  <a href="{{ url('#') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-bars me-2"></i>Menu {User}</a>
-                  <div class="dropdown-menu bg-transparent border-0">
-                      <a href="{{ route('pembelian_show') }}" class="dropdown-item">Pembelian</a>
-                      <a href="{{ route('pemesanan_user') }}" class="dropdown-item">Pemesanan</a>
-                      <a href="{{ route('transaksi_user_show') }}" class="dropdown-item">Transaksi</a>
-                      <a href="{{ route('booking') }}" class="dropdown-item">Booking</a>
+          @hasanyrole('admin|user')
+              <div class="navbar-nav w-100">
+                  <div class="nav-item dropdown">
+                      <a href="{{ url('#') }}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                          <i class="fas fa-bars me-2"></i>Menu {User}
+                      </a>
+                      <div class="dropdown-menu bg-transparent border-0">
+                          @role('admin')
+                              {{-- Tambahkan opsi menu yang hanya dilihat oleh admin --}}
+                              <a href="" class="dropdown-item">Menu Admin</a>
+                          @endrole
+
+                          {{-- Menu yang terlihat oleh user dan admin --}}
+                          <a href="{{ route('pembelian_show') }}" class="dropdown-item">Pembelian</a>
+                          <a href="{{ route('pemesanan_user') }}" class="dropdown-item">Pemesanan</a>
+                          <a href="{{ route('transaksi_user_show') }}" class="dropdown-item">Transaksi</a>
+                          <a href="{{ route('booking') }}" class="dropdown-item">Booking</a>
+                      </div>
                   </div>
               </div>
-          </div>
-      </nav>
+          @endhasanyrole
+
+  </div>
+  </nav>
   </div>
   <!-- Sidebar End -->

@@ -54,34 +54,47 @@
 
 
 
-        {{-- @role('user') --}}
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fas fa-box fa-3x text-primary"></i>
-                {{-- <i class="fas-regular fa-square-check fa-3x text-primary"></i> --}}
-                <div class="ms-3">
-                    <a href="{{ route('pemesanan_show') }}" class="mb-2">Total Pemesanan</a>
-                    <h6 class="mb-0">{{ $total_pemesanan }} Pemesanan</h6>
 
-                </div>
-            </div>
+{{-- Tampilkan ini jika peran pengguna adalah 'user' dan 'admin' --}}
+@hasanyrole('admin|user')
+<div class="col-sm-6 col-xl-3">
+    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+        <i class="fas fa-box fa-3x text-primary"></i>
+        {{-- <i class="fas-regular fa-square-check fa-3x text-primary"></i> --}}
+        <div class="ms-3">
+            <a href="{{ route('pemesanan_user') }}" class="mb-2">Total Pemesanan</a>
+
+            @if(auth()->check() && auth()->user()->hasRole('admin'))
+                <h6 class="mb-0">{{ $total_pemesanan }} Pemesanan (Admin View)</h6>
+            @else
+                <h6 class="mb-0">{{ $total_pemesanan }} Pemesanan</h6>
+            @endif
         </div>
-        {{-- @endrole --}}
+    </div>
+</div>
+@endhasanyrole
 
 
 
-        {{-- @role('user') --}}
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-table fa-3x text-primary"></i>
-                <div class="ms-3">
-                    <a href="{{ route('booking') }}" class="mb-2">Total Booking</a>
-                    <h6 class="mb-0">{{ $total_booking }} Booking</h6>
 
-                </div>
-            </div>
+
+@hasanyrole('admin|user')
+<div class="col-sm-6 col-xl-3">
+    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+        <i class="fa fa-table fa-3x text-primary"></i>
+        <div class="ms-3">
+            <a href="{{ route('booking') }}" class="mb-2">Total Booking</a>
+
+            @if(auth()->check() && auth()->user()->hasRole('admin'))
+                <h6 class="mb-0">{{ $total_booking }} Booking (Admin View)</h6>
+            @else
+                <h6 class="mb-0">{{ $total_booking }} Booking</h6>
+            @endif
         </div>
-        {{-- @endrole --}}
+    </div>
+</div>
+@endhasanyrole
+
 
 
     </div>
